@@ -1,12 +1,15 @@
-import * as React from "react";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import ListItemText from "@mui/material/ListItemText";
-import Select from "@mui/material/Select";
+import {
+  OutlinedInput,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  ListItemText,
+  Select,
+} from "@mui/material";
 
 export default function MultipleSelct({ labelName, data, value, setValue }) {
+
+  // get selected value from select 
   const handleChange = (event) => {
     const {
       target: { value: selectedValue },

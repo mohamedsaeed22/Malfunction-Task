@@ -4,6 +4,7 @@ import MultipleSelect from "../components/MultipleSelect";
 import DateAndTimePicker from "../components/DateAndTimePicker";
 import MaintenanceTable from "../components/MaintenanceTable";
 import { Add } from "@mui/icons-material";
+import { isDateConflict, addData } from "../utils/dataHelper";
 
 const malfunctionArr = [
   "Electrical",
@@ -23,40 +24,33 @@ const Home = ({ notify }) => {
   const [endDate, setEndDate] = useState("");
   const [tableArr, setTableArr] = useState([]);
 
-  const data = {
-    malfunctionType,
-    importance,
-    deliveryDate,
-    startDate,
-    endDate,
-  };
-
-  const isDateConflict = () => {
-    for (const item of tableArr) {
-      const itemStartDate = item.startDate;
-      const itemEndDate = item.endDate;
-      if (startDate.$d === itemStartDate.$d && endDate.$d === itemEndDate.$d) {
-        return true;
-      }
-    }
-    return false;
-  };
-
   const handleAdd = () => {
     if (!malfunctionType) {
-      notify("Please select a malfuction", "error");
-    } else if (!importance) {
-      notify("Please select importance", "error");
-    } else if (!(endDate.$d - startDate.$d > 1)) {
-      notify("EndDate must be after startDate", "error");
-    } else if (isDateConflict()) {
-      notify("start and end date already taken by another malfuction", "error");
-    } else {
-      setTableArr([...tableArr, data]);
-      setMalfunctionType("");
-      setImportance("");
-      notify("added successfully", "success");
+      notify("Please select a malfunction", "error");
+      return;
     }
+    if (!importance) {
+      notify("Please select importance", "error");
+      return;
+    }
+    if (!(endDate.$d - startDate.$d > 1)) {
+      notify("End Date must be after Start Date", "error");
+      return;
+    }
+    if (isDateConflict(tableArr, startDate, endDate)) {
+      notify("Start and End date overlap with existing data", "error");
+      return;
+    }
+    const data = {
+      malfunctionType,
+      importance,
+      deliveryDate,
+      startDate,
+      endDate,
+    };
+    addData(tableArr, setTableArr, data, notify);
+    setMalfunctionType("");
+    setImportance("");
   };
 
   return (

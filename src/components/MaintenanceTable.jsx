@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import {
   Table,
@@ -12,6 +11,7 @@ import {
   tableCellClasses,
 } from "@mui/material";
 
+// mui styles components for table 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -31,17 +31,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function MaintenanceTable({ data = [], setData, notify }) {
-  useEffect(() => {
-    if (!data || data.length === 0) {
-      notify("No data available", "error");
-    }
-  }, [data, notify]);
+// show requests malfunction at maintenance table
+export default function MaintenanceTable({ data, setData, notify }) {
 
+  // format date to be the same of selected date
   const formatDate = (date) => {
-    return date.format("YYYY-MM-DD HH:mm:ss");
+    return date.format("MM/DD/YYYY hh:mm A");
   };
-
+  
+  //delete selected row form table
   const handleDeleteRow = (index) => {
     const updatedData = [...data];
     updatedData.splice(index, 1);
@@ -64,30 +62,35 @@ export default function MaintenanceTable({ data = [], setData, notify }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row, index) => (
-            <StyledTableRow key={index}>
-              <StyledTableCell>{index + 1}</StyledTableCell>
-              <StyledTableCell align="left">
-                {row.malfunctionType}
-              </StyledTableCell>
-              <StyledTableCell align="left">{row.importance}</StyledTableCell>
-              <StyledTableCell align="left">
-                {formatDate(row.startDate)}
-              </StyledTableCell>
-              <StyledTableCell align="left">
-                {formatDate(row.endDate)}
-              </StyledTableCell>
-              <StyledTableCell align="left">
-                {formatDate(row.deliveryDate)}
-              </StyledTableCell>
-              <StyledTableCell align="left">
-                <Checkbox
-                  onChange={() => handleDeleteRow(index)}
-                  color="primary"
-                />
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
+          {data?.map(
+            (
+              { malfunctionType, importance, startDate, endDate, deliveryDate },
+              index
+            ) => (
+              <StyledTableRow key={index}>
+                <StyledTableCell>{index + 1}</StyledTableCell>
+                <StyledTableCell align="left">
+                  {malfunctionType}
+                </StyledTableCell>
+                <StyledTableCell align="left">{importance}</StyledTableCell>
+                <StyledTableCell align="left">
+                  {formatDate(startDate)}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  {formatDate(endDate)}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  {formatDate(deliveryDate)}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  <Checkbox
+                    onChange={() => handleDeleteRow(index)}
+                    color="primary"
+                  />
+                </StyledTableCell>
+              </StyledTableRow>
+            )
+          )}
         </TableBody>
       </Table>
     </TableContainer>
