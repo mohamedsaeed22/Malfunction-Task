@@ -30,14 +30,27 @@ const Maint = ({ notifyErr, notifySuc }) => {
     startDate,
     endDate,
   };
+
+  const isDateConflict = () => {
+    for (const item of tableArr) {
+      const itemStartDate = item.startDate;
+      const itemEndDate = item.endDate;
+      if (startDate.$d === itemStartDate.$d && endDate.$d === itemEndDate.$d) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   const handleAdd = () => {
-    console.log(startDate,endDate);
     if (!malfunctionType) {
       notifyErr("Please select a malfuction");
     } else if (!importance) {
       notifyErr("Please select importance");
     } else if (!(endDate.$d - startDate.$d > 1)) {
       notifyErr("End Date must be greater than start date ");
+    } else if (isDateConflict()) {
+      notifyErr("start and end dates already taken by another malfuction");
     } else {
       setTableArr([...tableArr, data]);
       setMalfunctionType("");
@@ -113,7 +126,7 @@ const Maint = ({ notifyErr, notifySuc }) => {
           Add
         </Button>
       </Box>
-      <MaintenanceTable data={tableArr} notifySuc={notifySuc}/>
+      <MaintenanceTable data={tableArr} notifySuc={notifySuc} />
     </Box>
   );
 };
