@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Box, Grid, Divider, Chip, Button } from "@mui/material";
-import MultipleSelect from "./MultipleSelect";
-import DateAndTimePicker from "./DateAndTimePicker";
-import MaintenanceTable from "./MaintenanceTable";
+import MultipleSelect from "../components/MultipleSelect";
+import DateAndTimePicker from "../components/DateAndTimePicker";
+import MaintenanceTable from "../components/MaintenanceTable";
 import { Add } from "@mui/icons-material";
 
 const malfunctionArr = [
@@ -15,7 +15,7 @@ const malfunctionArr = [
 ];
 const importanceArr = ["Low", "Medium", "Heigh"];
 
-const Maint = ({ notifyErr, notifySuc }) => {
+const Home = ({ notify }) => {
   const [malfunctionType, setMalfunctionType] = useState("");
   const [importance, setImportance] = useState("");
   const [deliveryDate, setDeliveryDate] = useState("");
@@ -44,18 +44,18 @@ const Maint = ({ notifyErr, notifySuc }) => {
 
   const handleAdd = () => {
     if (!malfunctionType) {
-      notifyErr("Please select a malfuction");
+      notify("Please select a malfuction", "error");
     } else if (!importance) {
-      notifyErr("Please select importance");
+      notify("Please select importance", "error");
     } else if (!(endDate.$d - startDate.$d > 1)) {
-      notifyErr("End Date must be greater than start date ");
+      notify("EndDate must be after startDate", "error");
     } else if (isDateConflict()) {
-      notifyErr("start and end dates already taken by another malfuction");
+      notify("start and end date already taken by another malfuction", "error");
     } else {
       setTableArr([...tableArr, data]);
       setMalfunctionType("");
       setImportance("");
-      notifySuc("added successfully");
+      notify("added successfully", "success");
     }
   };
 
@@ -74,7 +74,6 @@ const Maint = ({ notifyErr, notifySuc }) => {
         <Grid item xs={12} sm={6}>
           <MultipleSelect
             labelName="Malfunction"
-            allowSingleSelection="false"
             data={malfunctionArr}
             value={malfunctionType}
             setValue={setMalfunctionType}
@@ -83,7 +82,6 @@ const Maint = ({ notifyErr, notifySuc }) => {
         <Grid item xs={12} sm={6}>
           <MultipleSelect
             labelName="Importance"
-            allowSingleSelection="true"
             data={importanceArr}
             value={importance}
             setValue={setImportance}
@@ -126,9 +124,9 @@ const Maint = ({ notifyErr, notifySuc }) => {
           Add
         </Button>
       </Box>
-      <MaintenanceTable data={tableArr} notifySuc={notifySuc} />
+      <MaintenanceTable data={tableArr} setData={setTableArr} notify={notify} />
     </Box>
   );
 };
 
-export default Maint;
+export default Home;

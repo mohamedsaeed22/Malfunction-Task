@@ -1,11 +1,10 @@
-import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
-import Maint from "./components/Maint";
 import { Container } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
+import Home from './pages/Home';
 
-const notifyErr = (msg) =>
-  toast.error(msg, {
+const notify = (msg, type = "success") => {
+  const options = {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -14,23 +13,22 @@ const notifyErr = (msg) =>
     draggable: true,
     progress: undefined,
     theme: "light",
-  });
-const notifySuc = (msg) =>
-  toast.success(msg, {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-  });
+  };
+
+  if (type === "success") {
+    toast.success(msg, options);
+  } else if (type === "error") {
+    toast.error(msg, options);
+  } else {
+    toast.info(msg, options);
+  }
+};
+
 function App() {
   return (
     <Container>
       <ToastContainer />
-      <Maint notifyErr={notifyErr} notifySuc={notifySuc}/>
+      <Home notify={notify} />
     </Container>
   );
 }

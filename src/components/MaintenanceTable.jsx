@@ -1,13 +1,16 @@
+import { useEffect } from "react";
 import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Checkbox from "@mui/material/Checkbox";
-import Paper from "@mui/material/Paper";
-import { useEffect, useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Checkbox,
+  Paper,
+  TableCell,
+  tableCellClasses,
+} from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -28,23 +31,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function MaintenanceTable({ data, notifySuc }) {
-  const [tableData, setTableData] = useState([]);
+export default function MaintenanceTable({ data = [], setData, notify }) {
   useEffect(() => {
-    if (data) {
-      setTableData(data);
+    if (!data || data.length === 0) {
+      notify("No data available", "error");
     }
-  }, [data]);
+  }, [data, notify]);
 
   const formatDate = (date) => {
     return date.format("YYYY-MM-DD HH:mm:ss");
   };
 
   const handleDeleteRow = (index) => {
-    const updatedData = [...tableData];
+    const updatedData = [...data];
     updatedData.splice(index, 1);
-    notifySuc("Deleted row successfully");
-    setTableData(updatedData);
+    setData(updatedData);
+    notify("Deleted row successfully", "success");
   };
 
   return (
@@ -62,7 +64,7 @@ export default function MaintenanceTable({ data, notifySuc }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableData?.map((row, index) => (
+          {data.map((row, index) => (
             <StyledTableRow key={index}>
               <StyledTableCell>{index + 1}</StyledTableCell>
               <StyledTableCell align="left">
