@@ -14,7 +14,7 @@ const malfunctionArr = [
   "Structural",
   "Roofing",
 ];
-const importanceArr = ["Low", "Medium", "Heigh"];
+const importanceArr = ["Low", "Medium", "High"];
 
 const Home = ({ notify }) => {
   const [malfunctionType, setMalfunctionType] = useState("");

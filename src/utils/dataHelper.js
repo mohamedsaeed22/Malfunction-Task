@@ -22,7 +22,7 @@ const addData = (
   notify
 ) => {
   setTableArr([...tableArr, data]);
-  notify("Added successfully", "success");
+  notify("Added Malfuction successfully", "success");
 };
 
 export { isDateConflict, addData };

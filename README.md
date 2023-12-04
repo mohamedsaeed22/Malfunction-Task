@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# Future of Egypt - Malfunction Task
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+The Malfunction Task application allows users to select a malfunction type, specify its importance, delivery date, start date, and end date. All fields must be selected, and the end date must be after the start date. Additionally, if the selected start and end dates already exist in the table, a notification Toastify will be displayed. The application is responsive and includes a table that have all requests with checkboxes to delete specific rows.
 
-In the project directory, you can run:
 
-### `npm start`
+### Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Select malfunction type and importance.
+- Specify delivery, start, and end dates.
+- Validation to ensure the end date is after the start date.
+- Inform Toast notifications for every field.
+- Responsive design for various screen sizes.
+- Table with checkboxes to delete specific row.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Libraries Used
 
-### `npm test`
+- **react**
+- **MaterialUI-MUI**
+- **Toastify**
+- **dayjs**
+## Live Demo
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Explore the live version of the Malfunction Task Web App:
 
-### `npm run build`
+[Live Demo](https://futureofegypt-malfuctiontask.netlify.app/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
+## Project Designs
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Home Page 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Home Page ](./Design/home.png)
 
-### `npm run eject`
+Validate End Date 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![validate End Date ](./Design/validate%20Enddate.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Validate Existing Date 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![validate EndDate ](./Design/validate%20exisitingDate.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Responive
 
-## Learn More
+![validate EndDate ](./Design/reponsive.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Usage
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To get started with the Exercise Exploration Web App:
 
-### Code Splitting
+1. Clone this repository.
+2. Navigate to the project directory.
+3. Install dependencies using `npm install` or `yarn install`.
+4. Run the application using `npm start` or `yarn start`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Contributions
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contributions are welcome! Feel free to submit issues, feature requests, or pull requests to help improve this project.
